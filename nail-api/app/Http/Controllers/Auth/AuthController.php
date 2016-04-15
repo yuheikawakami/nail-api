@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,8 +29,8 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
-
+    protected $redirectTo = '/nailist/home';
+    protected $redirectAfterLogout = '/login';
     /**
      * Create a new authentication controller instance.
      *
@@ -61,6 +62,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'name' => $data['name'],
+    //         'email' => $data['email'],
+    //         'password' => bcrypt($data['password']),
+    //     ]);
+    // }
     protected function create(array $data)
     {
         return User::create([
@@ -68,5 +77,25 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    // protected function postRegister(Request $request)
+    // {
+    //   Log::debug('aaa');
+    //     $user = User::create([
+    //         'name' => $request->input('name'),
+    //         'email' => $request->input('email'),
+    //         'password' => bcrypt($request->input('password')),
+    //     ]);
+    //
+    //     return response()->json($user);
+    // }
+
+    public function authenticate()
+    {
+        if (Auth::attempt(['email' => $email, 'password' => $password]))
+        {
+            return response()->json('aaaaaaaaa');
+        }
     }
 }

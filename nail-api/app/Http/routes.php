@@ -28,4 +28,20 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+    Route::auth();
+    Route::get('nailist/home', 'HomeController@index');
+    Route::controller('nailist/profile', 'ProfilesController');
+    Route::controller('nailist/schedules', 'SchedulesController');
+    Route::controller('nailist/others', 'OthersController');
+    Route::get('users/home', 'UserController@index');
+    Route::get('users/map', 'UserController@map');
+    Route::controller('users/reservations', 'ReservationsController');
+    Route::controller('nailist/portfolio', 'PortfoliosController');
+
+    /*
+    // Route::controller('nailist/talks', 'TalksController');
+    // Route::controller('nailist/info', 'InfoController');
+    // Route::controller('nailist/service', 'ServiceController');
+    // Route::controller('nailist/guide', 'GuideController'); */
+
 });
